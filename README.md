@@ -18,6 +18,6 @@ this information is collected per jobid and written to Comment-field of jobinfo 
 ## Deployment
 
 On monsoon we have the gpustats.py code running on each node with a gpu. The
-code will continually update the /tmp/gpustats.json file with gpu usage
-metrics. We appended to our task_epilog.sh script with code from
-./files/epilog.sh.
+code will continually update a file unique to each job within /tmp/gpustats/ for
+each job that uses a gpu. Our task_epilog.sh script sets the job comment to the
+contents of this file, if it exists.
