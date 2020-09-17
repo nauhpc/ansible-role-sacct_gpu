@@ -1,5 +1,5 @@
-# ansible-role-sacct_gpu
-Add gpu utilization stats to Slurm batch scheduler accounting db. Tested with CentOS-7.
+# gpustats
+Add gpu utilization stats to Slurm batch scheduler accounting db. Tested with CentOS-6.
 
 ## Background
 
@@ -17,4 +17,7 @@ this information is collected per jobid and written to Comment-field of jobinfo 
 
 ## Deployment
 
-Simply apply this ansible-role to your nodes. We are using this together with [OpenHPC](https://openhpc.community/) and use this directly with OHPC-images.
+On monsoon we have the gpustats.py code running on each node with a gpu. The
+code will continually update a file unique to each job within /tmp/gpustats/ for
+each job that uses a gpu. Our task_epilog.sh script sets the job comment to the
+contents of this file, if it exists.
